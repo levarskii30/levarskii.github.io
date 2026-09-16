@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сборник скибиди цитат</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+  :root{
+    --bg: #0d0f14;
+    --bg2: #171a22;
+    --card: #1b1e27;
+    --toilet-blue: #4fd1ff;
+    --acid: #d6ff3f;
+    --pink: #ff4fb0;
+    --paper: #f4f1ea;
+    --muted: rgba(244,241,234,0.56);
+    --line: rgba(255,255,255,0.12);
+  }
+  :root[data-theme="light"]{
+    --bg:#eef1f6; --bg2:#ffffff; --card:#ffffff; --paper:#12141a;
+    --muted: rgba(18,20,26,0.55); --line: rgba(0,0,0,0.12);
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg:#eef1f6; --bg2:#ffffff; --card:#ffffff; --paper:#12141a;
+      --muted: rgba(18,20,26,0.55); --line: rgba(0,0,0,0.12);
+    }
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family: 'Space Grotesk', sans-serif;
+    background:
+      radial-gradient(circle at 12% 0%, rgba(79,209,255,0.10), transparent 40%),
+      radial-gradient(circle at 92% 10%, rgba(255,79,176,0.08), transparent 45%),
+      var(--bg);
+    color: var(--paper);
+    min-height: 100vh;
+  }
+
+  .wrap{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 56px 20px 100px;
+  }
+
+  .band{
+    height: 8px;
+    border-radius: 4px;
+    margin-bottom: 40px;
+    background: repeating-linear-gradient(90deg, var(--toilet-blue) 0 22px, var(--acid) 22px 44px, var(--pink) 44px 66px);
+  }
+
+  header{ margin-bottom: 36px; }
+  .kicker{
+    font-size: 13px;
+    color: var(--toilet-blue);
+    margin: 0 0 12px;
+  }
+  h1{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(44px, 8vw, 68px);
+    line-height: 0.94;
+    margin: 0;
+  }
+  h1 span{ color: var(--toilet-blue); }
+  .sub{
+    margin: 16px 0 0;
+    max-width: 52ch;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .toolbar{
+    display: flex;
+    gap: 10px;
+    margin: 32px 0 28px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .search{
+    flex: 1 1 220px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: var(--paper);
+    font-family: inherit;
+    font-size: 15px;
+  }
+  .search:focus{ outline: none; border-color: var(--toilet-blue); }
+  .count{
+    font-size: 13px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .grid{
+    display: grid;
+    gap: 14px;
+  }
+
+  .quote{
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 24px;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .num{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    color: var(--toilet-blue);
+    line-height: 1;
+  }
+  .quote p{
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  .quote.mine{ border-color: var(--pink); }
+  .quote.mine .num{ color: var(--pink); }
+
+  .empty{
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .add{
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px dashed var(--line);
+  }
+  .add .kicker{ margin-bottom: 16px; }
+  .add form{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .add input[type=text]{
+    flex: 1 1 320px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: var(--paper);
+    font-family: inherit;
+    font-size: 15px;
+  }
+  .add input[type=text]:focus{ outline: none; border-color: var(--pink); }
+  .add button{
+    background: var(--acid);
+    color: #0d0f14;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 22px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .add button:hover{ filter: brightness(1.05); }
+  .hint{
+    margin: 10px 0 0;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+
+  footer{
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--muted);
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="band"></div>
+
+    <header>
+      <p class="kicker">народный архив · живая коллекция</p>
+      <h1>Сборник <span>скибиди</span> цитат</h1>
+      <p class="sub">Мудрость, рождённая в чатах. Ищи по ключевым словам или добавь свою — она сохранится прямо у тебя в браузере.</p>
+    </header>
+
+    <div class="toolbar">
+      <input class="search" id="search" type="text" placeholder="Искать цитату…">
+      <span class="count" id="count"></span>
+    </div>
+
+    <div class="grid" id="grid"></div>
+    <p class="empty" id="empty" style="display:none;">Ничего не найдено. Попробуй другое слово.</p>
+
+    <div class="add">
+      <p class="kicker">добавить свою цитату</p>
+      <form id="addForm">
+        <input type="text" id="newQuote" placeholder="Например: Скибиди не приговор, а образ жизни" maxlength="200" required>
+        <button type="submit">Добавить</button>
+      </form>
+      <p class="hint">Сохраняется только в твоём браузере — другие посетители сайта её не увидят.</p>
+    </div>
+
+    <footer>
+      <span>скибиди-архив · сент. 2026</span>
+      <span>🚽📜</span>
+    </footer>
+  </div>
+
+<script>
+  const BASE_QUOTES = [
+    "Не всякий унитаз — скибиди-указ.",
+    "Кто рифмует без причин, тот и есть скибиди-господин.",
+    "Хохо — не просто смех, это скибиди-успех.",
+    "Другада — не адрес, а состояние души.",
+    "Волк не кошка — скибиди-окрошка.",
+    "Стержень не мох — скибиди-хохо!",
+    "Линейка не птичка — скибиди-яичко.",
+    "Число не банка — скибиди-болванка."
+  ];
+
+  const STORAGE_KEY = "skibidi-quotes-mine";
+
+  function loadMine(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function saveMine(list){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    }catch(e){
+      console.error("Не удалось сохранить:", e);
+    }
+  }
+
+  let mine = loadMine();
+
+  function allQuotes(){
+    return [
+      ...BASE_QUOTES.map(q => ({ text: q, mine: false })),
+      ...mine.map(q => ({ text: q, mine: true }))
+    ];
+  }
+
+  function render(){
+    const term = document.getElementById('search').value.trim().toLowerCase();
+    const list = allQuotes().filter(q => q.text.toLowerCase().includes(term));
+    const grid = document.getElementById('grid');
+    const empty = document.getElementById('empty');
+    const count = document.getElementById('count');
+
+    count.textContent = list.length + (list.length === 1 ? " цитата" : " цитат");
+
+    if(list.length === 0){
+      grid.innerHTML = "";
+      empty.style.display = "block";
+      return;
+    }
+    empty.style.display = "none";
+
+    grid.innerHTML = list.map((q, i) => `
+      <div class="quote ${q.mine ? 'mine' : ''}">
+        <span class="num">${String(i+1).padStart(2,'0')}</span>
+        <p>${escapeHtml(q.text)}</p>
+      </div>
+    `).join("");
+  }
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  document.getElementById('search').addEventListener('input', render);
+
+  document.getElementById('addForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const input = document.getElementById('newQuote');
+    const val = input.value.trim();
+    if(!val) return;
+    mine.push(val);
+    saveMine(mine);
+    input.value = "";
+    render();
+  });
+
+  render();
+</script>
+</body>
+</html>
